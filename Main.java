@@ -10,21 +10,24 @@ public class Main {
         String running = "S";
         List<Produto> listaProdutos = Ler_excel.lendoExcel();
 
-        System.out.println("Olá, eu sou a lolabot! E Irei lhe auxiliar nessa jornada..");
+        System.out.println("Olá, eu sou a lolabot! ʕ•ᴥ•ʔ ");
+        System.out.println("E irei lhe axiliar nesta incrivel jornada ʕ˃ᴥ˂ʔ ");
+        System.out.println("Primeiramente, escolha uma opçâo: ");
+
 
         while (!running.equals("N")) {
             menuPrincipal();
 
             int Menu_muito_top = choose(sc, 1, 5);
 
-            //  Mostrar todos os produtos
+            // Mostrar todos os produtos
             if (Menu_muito_top == 1) {
                 showAll(listaProdutos);
 
-                //  Ordenar por nome
+                // Ordenar por nome
             } else if (Menu_muito_top == 2) {
                 boolean voltar = true;
-                while (voltar){
+                while (voltar) {
                     menuShowOrderName();
                     int escolhaMarca = choose(sc, 1, 3);
 
@@ -32,10 +35,10 @@ public class Main {
                     voltar = orderName(escolhaMarca, listaProdutoOrganizada);
                 }
 
-                //  Ordenar por preço
+                // Ordenar por preço
             } else if (Menu_muito_top == 3) {
                 boolean voltar = true;
-                while (voltar){
+                while (voltar) {
                     menuShowOrderPrice();
                     int escolhaMarca = choose(sc, 1, 3);
 
@@ -46,9 +49,9 @@ public class Main {
                 // Calcular a média de preços
             } else if (Menu_muito_top == 4) {
                 double media = media(listaProdutos);
-                System.out.printf("A média de preços é igual a: %.2f \n",media);
+                System.out.printf("A média de preços é igual a: %.2f \n", media);
 
-                // Opção 5: Sair do programa
+                //  Sair do programa
             } else if (Menu_muito_top == 5) {
                 break;
 
@@ -61,6 +64,7 @@ public class Main {
     // Exibe o menu principal
     public static void menuPrincipal() {
         System.out.println("---------------------------------");
+        System.out.println("|        escolha uma opção       |");
         System.out.println("|                                |");
         System.out.println("|[1] Mostrar toda a lista.       |");
         System.out.println("|[2] Mostrar ordem por nome.     |");
@@ -70,8 +74,8 @@ public class Main {
         System.out.println("---------------------------------");
     }
 
-
-    public static int choose(Scanner sc, int min, int max){
+    // Função para escolher uma opção dentro de um intervalo
+    public static int choose(Scanner sc, int min, int max) {
         int escolha;
         while (true) {
             try {
@@ -82,12 +86,13 @@ public class Main {
                     break;
                 }
             } catch (Exception e) {
-                System.out.println("Digite um número, por favor.");
+                System.out.println("Escreva um numero valido");
             }
         }
         return escolha;
     }
 
+    // Exibe todos os produtos da lista
     public static void showAll(List<Produto> listaProdutos) {
         System.out.println("------------------------------------------------------------------");
         System.out.printf("| %-42s | %-6s \n", "NOME", "PREÇO");
@@ -96,11 +101,10 @@ public class Main {
         for (Produto produto : listaProdutos) {
             System.out.printf("| %-42s | %.2f \n", produto.getNome(), produto.getPreco());
         }
-
     }
 
-
-    public static void menuShowOrderName(){
+    // Exibe o menu para ordenação por nome
+    public static void menuShowOrderName() {
         System.out.println("---------------------------------");
         System.out.println("|        Ordenar por nome        |");
         System.out.println("|                                |");
@@ -110,13 +114,12 @@ public class Main {
         System.out.println("---------------------------------");
     }
 
-    public static boolean orderName(int escolha, List<Produto> listaCertinha){
+    // Ordena a lista de produtos por nome
+    public static boolean orderName(int escolha, List<Produto> listaCertinha) {
         if (escolha == 1) {
             listaCertinha.sort((Produto s1, Produto s2) -> s1.getNome().compareTo(s2.getNome()));
-
         } else if (escolha == 2) {
             listaCertinha.sort((Produto s1, Produto s2) -> s2.getNome().compareTo(s1.getNome()));
-
         } else if (escolha == 3) {
             return false;
         }
@@ -125,9 +128,8 @@ public class Main {
         return true;
     }
 
-
-
-    public static void menuShowOrderPrice(){
+    // Exibe o menu para ordenação por preço
+    public static void menuShowOrderPrice() {
         System.out.println("---------------------------------");
         System.out.println("|        Ordenar por preço       |");
         System.out.println("|                                |");
@@ -137,8 +139,8 @@ public class Main {
         System.out.println("---------------------------------");
     }
 
-
-    public static boolean orderPrice(int escolha, List<Produto> listaCertinha){
+    // Ordena a lista de produtos por preço
+    public static boolean orderPrice(int escolha, List<Produto> listaCertinha) {
         if (escolha == 1) {
             listaCertinha.sort((Produto s1, Produto s2) -> Double.compare(s1.getPreco(), s2.getPreco()));
         } else if (escolha == 2) {
@@ -151,7 +153,7 @@ public class Main {
         return true;
     }
 
-
+    // Calcula a média de preços dos produtos
     public static double media(List<Produto> listaProdutos) {
         double soma = 0.0;
         for (Produto produto : listaProdutos) {

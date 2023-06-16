@@ -15,28 +15,32 @@ import org.apache.poi.ss.usermodel.*;
 public class Ler_excel {
     public static List<Produto> lendoExcel() throws IOException {
 
+        // Cria uma lista vazia para armazenar os produtos
         List<Produto> listaProdutos = new ArrayList<Produto>();
 
+        // Pega o caminho do arquivo Excel
         FileInputStream arquivo = caminho();
 
+        // Cria uma instância do workbook a partir do arquivo Excel
         XSSFWorkbook workbook = new XSSFWorkbook(arquivo);
 
+        // Pega a primeira planilha do workbook
         XSSFSheet sheetareas = workbook.getSheetAt(0);
 
+        // Percorre cada linha da planilha
         for (Row row : sheetareas) {
+            // Cria um iterador para percorrer as células de cada linha
             Iterator<Cell> cellIterator = row.cellIterator();
 
+            // Cria um novo objeto Produto para cada linha
             Produto produto = new Produto();
             listaProdutos.add(produto);
 
-
+            // Percorre cada célula da linha
             while (cellIterator.hasNext()) {
-
                 Cell cell = cellIterator.next();
 
-
-
-
+                // Lê o valor da célula e atribui ao produto de acordo com a coluna
                 switch (cell.getColumnIndex()) {
                     case 0 -> produto.setNome(cell.getStringCellValue());
                     case 1 -> produto.setPreco(cell.getNumericCellValue());
@@ -47,7 +51,7 @@ public class Ler_excel {
         // Fecha o arquivo
         arquivo.close();
 
-        // Retorna a lista de produtos lidos do arquivo Excel
+        // devolve a lista de produtos lidos do arquivo Excel
         return listaProdutos;
     }
 
@@ -62,11 +66,10 @@ public class Ler_excel {
                 String filePath = scanner.nextLine();
                 String fileName = filePath + "\\" + filenome;
 
-                System.out.println(fileName);
 
                 FileInputStream arquivo = new FileInputStream(new File(fileName));
                 return arquivo;
-            } catch (Exception e) {
+            } catch (Exception e) {         // se estiver errado pede o caminho de novo
                 System.out.println("Verifique o caminho do arquivo Excel.");
             }
         }

@@ -4,9 +4,9 @@ public class Produto {
     private String nome;    //  armazenar o nome do produto
     private double preco;   // armazenar o preço do produto
 
-    public Produto() { }    // Construtor vazio
+    public Produto() { }    // Construtor fica vazio
 
-    // inicializa os atributos nome, marca e preco
+    // inicializa os atributos nome e preco
     public Produto(String nome, double preco) {
         super();
         this.nome = nome;
