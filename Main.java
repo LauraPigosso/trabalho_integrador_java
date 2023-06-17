@@ -75,22 +75,25 @@ public class Main {
     }
 
     // Função para escolher uma opção dentro de um intervalo
-    public static int choose(Scanner sc, int min, int max) {
-        int escolha;
-        while (true) {
-            try {
-                System.out.print("Escolha sua opção: ");
-                escolha = sc.nextInt();
+  public static int choose(Scanner sc, int min, int max) {
+    int escolha;
+    while (true) {
+        try {
+            System.out.print("Escolha sua opção: ");
+            escolha = sc.nextInt();
+            sc.nextLine(); // Consumir o caractere de nova linha
 
-                if (escolha >= min && escolha <= max) {
-                    break;
-                }
-            } catch (Exception e) {
-                System.out.println("Escreva um numero valido");
+            if (escolha >= min && escolha <= max) {
+                break;
             }
+        } catch (Exception e) {
+            System.out.println("Escreva um número válido");
+            sc.nextLine(); // Consumir o caractere de nova linha em caso de exceção
         }
-        return escolha;
     }
+    return escolha;
+}
+
 
     // Exibe todos os produtos da lista
     public static void showAll(List<Produto> listaProdutos) {
